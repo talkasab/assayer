@@ -37,3 +37,7 @@ gem "jquery-rails"
 gem "settingslogic"
 gem "compass", ">= 0.11.1"
 gem "html5-boilerplate"
+
+group :test do
+  gem 'shoulda'
+end
