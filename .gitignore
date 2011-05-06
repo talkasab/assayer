@@ -2,3 +2,17 @@
 db/*.sqlite3
 log/*.log
 tmp/
+*.sw?
+**/*.sw?
+config/database.yml
+*~
+*.cache
+*.log
+*.pid
+tmp/**/*
+.DS_Store
+doc/api
+doc/app
+doc/plugins
+doc/*.dot
+
