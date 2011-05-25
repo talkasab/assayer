@@ -51,4 +51,5 @@ group :test, :development do
   gem 'hirb'
   gem 'interactive_editor'
   gem 'memory_test_fix', '>= 0.2.0'
+  gem 'spork', '~> 0.9.0.rc7'
 end
