@@ -37,8 +37,17 @@ gem "jquery-rails"
 gem "rails_config"
 gem "compass", "~> 0.11.1"
 gem "html5-boilerplate"
+gem "rails3-generators"
 
-group :test do
-  gem 'shoulda'
+group :test, :development do
+  gem 'rspec-rails', "~> 2.6"
+  gem 'capybara', '1.0.0beta1'
+  gem 'mocha', '~> 0.9'
+  gem 'shoulda-matchers'
   gem 'factory_girl_rails'
+  gem 'wirble'
+  gem 'wirb'
+  gem 'awesome_print'
+  gem 'hirb'
+  gem 'interactive_editor'
 end
