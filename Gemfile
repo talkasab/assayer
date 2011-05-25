@@ -34,8 +34,8 @@ gem "haml", ">= 3.0.0"
 gem "haml-rails"
 gem "jammit"
 gem "jquery-rails"
-gem "settingslogic"
-gem "compass", ">= 0.11.1"
+gem "rails_config"
+gem "compass", "~> 0.11.1"
 gem "html5-boilerplate"
 
 group :test do
