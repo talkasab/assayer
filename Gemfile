@@ -50,4 +50,5 @@ group :test, :development do
   gem 'awesome_print'
   gem 'hirb'
   gem 'interactive_editor'
+  gem 'memory_test_fix', '>= 0.2.0'
 end
