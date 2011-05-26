@@ -2,11 +2,11 @@
 
 FactoryGirl.define do
   factory :scenario do
-      association :scenario_family
-      patient_age 12
-      patient_sex "M"
-      index_exam_type 12
-      index_exam_clinical_history "MyText"
-      index_exam_report "MyText"
-    end
+    association :scenario_family
+    patient_age 12
+    patient_sex "M"
+    association :index_exam_type, :factory => :exam_type
+    index_exam_clinical_history "MyText"
+    index_exam_report "MyText"
+  end
 end
