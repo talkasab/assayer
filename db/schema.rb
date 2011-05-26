@@ -10,10 +10,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110526011631) do
+ActiveRecord::Schema.define(:version => 20110526160047) do
 
   create_table "exam_types", :force => true do |t|
-    t.string   "name"
     t.string   "name",        :null => false
     t.text     "description"
     t.datetime "created_at"
@@ -21,10 +20,27 @@ ActiveRecord::Schema.define(:version => 20110526011631) do
   end
 
   add_index "exam_types", ["name"], :name => "index_exam_types_on_name", :unique => true
+
+  create_table "medical_record_item_types", :force => true do |t|
+    t.string   "name",        :null => false
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "medical_record_item_types", ["name"], :name => "index_medical_record_item_types_on_name", :unique => true
+
+  create_table "medical_record_items", :force => true do |t|
+    t.integer  "scenario_id"
+    t.integer  "days_from_index"
+    t.integer  "item_type_id"
+    t.string   "description"
+    t.text     "report"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "medical_record_items", ["scenario_id"], :name => "index_medical_record_items_on_scenario_id"
 
   create_table "scenario_families", :force => true do |t|
     t.string   "name"

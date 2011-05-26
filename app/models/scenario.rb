@@ -2,6 +2,7 @@ class Scenario < ActiveRecord::Base
   # Relationships
   belongs_to :scenario_family, :inverse_of => :scenarios
   belongs_to :index_exam_type, :class_name => "ExamType", :inverse_of => :scenarios 
+  has_many :items, :class_name => "MedicalRecordItem", :inverse_of => :scenario
 
   # Validations
   validates_presence_of :scenario_family
