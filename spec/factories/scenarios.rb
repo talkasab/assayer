@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :scenario do
-      scenario_family_id 5
+      association :scenario_family
       patient_age 12
       patient_sex "M"
       index_exam_type 12

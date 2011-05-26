@@ -10,7 +10,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110525201739) do
+ActiveRecord::Schema.define(:version => 20110526003813) do
+
+  create_table "scenario_families", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "scenario_families", ["name"], :name => "index_scenario_families_on_name", :unique => true
 
   create_table "scenarios", :force => true do |t|
     t.integer  "scenario_family_id",          :null => false
