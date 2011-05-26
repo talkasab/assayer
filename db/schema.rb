@@ -14,6 +14,13 @@ ActiveRecord::Schema.define(:version => 20110526011631) do
 
   create_table "exam_types", :force => true do |t|
     t.string   "name"
+    t.string   "name",        :null => false
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "exam_types", ["name"], :name => "index_exam_types_on_name", :unique => true
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
