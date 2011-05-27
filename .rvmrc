@@ -9,10 +9,10 @@ echo "Gemset: ${GEMSET}"
 path_remove ()  { export PATH=`echo -n $PATH | awk -v RS=: -v ORS=: '$0 != "'$1'"' | sed 's/:$//'`; }
 path_prepend () { path_remove $1; export PATH="$1:$PATH"; }
 NEW_PROJECT_PATH="${PWD}/bin"
-if [ -n $OLD_PROJECT_PATH ] && [ $OLD_PROJECT_PATH != $NEW_PROJECT_PATH ]; then
+if [ -n $OLD_PROJECT_PATH ] && [ "$OLD_PROJECT_PATH" != "$NEW_PROJECT_PATH" ]; then
 	path_remove $OLD_PROJECT_PATH
 fi
 path_prepend $NEW_PROJECT_PATH
 export OLD_PROJECT_PATH=$NEW_PROJECT_PATH
-echo "Set path to ${PATH}"
+echo "Prepended ${NEW_PROJECT_PATH} to PATH"
 rails --version
