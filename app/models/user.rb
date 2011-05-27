@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :ratings, :class_name => "ItemRating", :foreign_key => :rater_id, :inverse_of => :rater
   has_many :assignments, :class_name => "RatingAssignment", :foreign_key => :rater_id, :inverse_of => :rater
   has_many :scenario_families, :through => :assignments
+  has_many :scenario_statuses, :class_name => "RaterScenarioStatus", :foreign_key => :rater_id, :inverse_of => :rater
 
   # Validations
   validates_presence_of :name

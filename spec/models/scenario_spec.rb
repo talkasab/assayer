@@ -6,6 +6,9 @@ describe Scenario do
   # Relationships
   it { should belong_to(:scenario_family) }
   it { should belong_to(:index_exam_type) }
+  it { should have_many(:items) }
+  it { should have_many(:rater_statuses) }
+  it { should have_many(:raters) }
 
   # Validations
   it { should validate_presence_of(:scenario_family) }

@@ -9,6 +9,7 @@ describe User do
   it { should have_many(:ratings) }
   it { should have_many(:assignments) }
   it { should have_many(:scenario_families).through(:assignments) }
+  it { should have_many(:scenario_statuses) }
 
   # Validations
   it { should validate_presence_of(:name) }
