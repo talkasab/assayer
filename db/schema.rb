@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110526160047) do
+ActiveRecord::Schema.define(:version => 20110527033142) do
 
   create_table "exam_types", :force => true do |t|
     t.string   "name",        :null => false
@@ -20,6 +20,16 @@ ActiveRecord::Schema.define(:version => 20110526160047) do
   end
 
   add_index "exam_types", ["name"], :name => "index_exam_types_on_name", :unique => true
+
+  create_table "item_ratings", :force => true do |t|
+    t.integer  "item_id"
+    t.integer  "rater_id"
+    t.integer  "rating"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "item_ratings", ["item_id", "rater_id"], :name => "index_item_ratings_on_item_id_and_rater_id", :unique => true
 
   create_table "medical_record_item_types", :force => true do |t|
     t.string   "code",        :null => false

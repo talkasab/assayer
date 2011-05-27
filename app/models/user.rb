@@ -7,5 +7,9 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
 
+  # Assocations
+  has_many :ratings, :class_name => "ItemRating", :inverse_of => :rater
+
+  # Validations
   validates_presence_of :name
 end
