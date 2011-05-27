@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110527033142) do
+ActiveRecord::Schema.define(:version => 20110527043458) do
 
   create_table "exam_types", :force => true do |t|
     t.string   "name",        :null => false
@@ -53,6 +53,18 @@ ActiveRecord::Schema.define(:version => 20110527033142) do
   end
 
   add_index "medical_record_items", ["scenario_id"], :name => "index_medical_record_items_on_scenario_id"
+
+  create_table "rating_assignments", :force => true do |t|
+    t.integer  "rater_id"
+    t.integer  "scenario_family_id"
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "rating_assignments", ["rater_id"], :name => "index_rating_assignments_on_rater_id"
+  add_index "rating_assignments", ["scenario_family_id", "rater_id"], :name => "index_rating_assignments_on_scenario_family_id_and_rater_id", :unique => true
 
   create_table "scenario_families", :force => true do |t|
     t.string   "name"

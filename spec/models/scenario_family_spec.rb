@@ -5,6 +5,8 @@ describe ScenarioFamily do
 
   # Relationships
   it { should have_many(:scenarios) }
+  it { should have_many(:assignments) }
+  it { should have_many(:raters).through(:assignments) }
 
   # Validations
   it { should validate_presence_of(:name) }
