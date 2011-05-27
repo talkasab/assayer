@@ -4,4 +4,5 @@ class MedicalRecordItemType < ActiveRecord::Base
 
   # Validations
   validates :name, :presence => true, :uniqueness => true
+  validates :code, :presence => true, :uniqueness => true
 end
