@@ -1,8 +1,7 @@
 require 'spec_helper'
 
 describe ScenarioFamily do
-  let!(:livermri) { Factory.create(:scenario_family, :name => "Liver MRI") }
-  specify { ScenarioFamily.count.should == 1 }
+  let!(:breastca) { Factory.create(:scenario_family, :name => "Breast Cancer") }
 
   # Relationships
   it { should have_many(:scenarios) }

@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe Scenario do
+  let!(:breastca1) { Factory.create(:scenario, :patient_age => 58, :patient_sex => 'F') }
+
   # Relationships
   it { should belong_to(:scenario_family) }
   it { should belong_to(:index_exam_type) }

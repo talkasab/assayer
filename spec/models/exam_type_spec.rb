@@ -1,8 +1,7 @@
 require 'spec_helper'
 
 describe ExamType do
-  let!(:livermri) { Factory.create(:exam_type, :name => "Liver MRI") }
-  specify { ExamType.count.should == 1 }
+  let!(:mammogram) { Factory.create(:exam_type, :name => "Mammogram") }
 
   # Relationships
   it { should have_many(:scenarios) }

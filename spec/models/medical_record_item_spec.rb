@@ -1,9 +1,7 @@
 require 'spec_helper'
 
 describe MedicalRecordItem do
-  let!(:livermri) { Factory.create(:scenario, :scenario_family => Factory.create(:scenario_family, :name => "Liver MRI"), :index_exam_type => Factory.create(:exam_type, :name => "Liver MRI")) }
-  let!(:procedure) { Factory.create(:medical_record_item, :scenario => livermri) }
-  specify { MedicalRecordItem.count.should == 1 }
+  let!(:procedure) { Factory.create(:medical_record_item) }
 
   # Relationships
   it { should belong_to(:scenario) }
