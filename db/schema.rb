@@ -13,8 +13,8 @@
 ActiveRecord::Schema.define(:version => 20110527063441) do
 
   create_table "item_ratings", :force => true do |t|
-    t.integer  "item_id"
-    t.integer  "rater_id"
+    t.integer  "item_id",    :null => false
+    t.integer  "rater_id",   :null => false
     t.integer  "rating"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -34,11 +34,11 @@ ActiveRecord::Schema.define(:version => 20110527063441) do
   add_index "medical_record_item_types", ["name"], :name => "index_medical_record_item_types_on_name", :unique => true
 
   create_table "medical_record_items", :force => true do |t|
-    t.integer  "scenario_id"
-    t.integer  "days_from_index"
-    t.integer  "item_type_id"
+    t.integer  "scenario_id",     :null => false
+    t.integer  "days_from_index", :null => false
+    t.integer  "item_type_id",    :null => false
     t.string   "description"
-    t.text     "report"
+    t.text     "report",          :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -59,8 +59,8 @@ ActiveRecord::Schema.define(:version => 20110527063441) do
   add_index "rater_scenario_statuses", ["scenario_id"], :name => "index_rater_scenario_statuses_on_scenario_id"
 
   create_table "rating_assignments", :force => true do |t|
-    t.integer  "rater_id"
-    t.integer  "scenario_family_id"
+    t.integer  "rater_id",           :null => false
+    t.integer  "scenario_family_id", :null => false
     t.datetime "start_at"
     t.datetime "end_at"
     t.datetime "created_at"

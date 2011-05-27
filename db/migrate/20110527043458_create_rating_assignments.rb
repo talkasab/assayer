@@ -1,8 +1,8 @@
 class CreateRatingAssignments < ActiveRecord::Migration
   def self.up
     create_table :rating_assignments do |t|
-      t.references :rater
-      t.references :scenario_family
+      t.references :rater, :null => false
+      t.references :scenario_family, :null => false
       t.timestamp :start_at
       t.timestamp :end_at
       t.timestamps

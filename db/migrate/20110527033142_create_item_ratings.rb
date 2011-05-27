@@ -1,8 +1,8 @@
 class CreateItemRatings < ActiveRecord::Migration
   def self.up
     create_table :item_ratings do |t|
-      t.references :item
-      t.references :rater
+      t.references :item, :null => false
+      t.references :rater, :null => false
       t.integer :rating
       t.timestamps
     end
