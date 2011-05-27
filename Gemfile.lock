@@ -88,7 +88,6 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    memory_test_fix (0.2.0)
     mime-types (1.16)
     mocha (0.9.12)
     nokogiri (1.4.4)
@@ -173,7 +172,6 @@ DEPENDENCIES
   interactive_editor
   jammit
   jquery-rails
-  memory_test_fix (>= 0.2.0)
   mocha (~> 0.9)
   rails (= 3.0.7)
   rails3-generators
