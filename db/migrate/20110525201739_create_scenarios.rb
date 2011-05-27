@@ -4,7 +4,6 @@ class CreateScenarios < ActiveRecord::Migration
       t.references :scenario_family, :null => false
       t.integer :patient_age, :null => false
       t.string :patient_sex, :null => false
-      t.references :index_exam_type, :null => false
       t.text :index_exam_clinical_history, :null => false
       t.text :index_exam_comment
       t.text :index_exam_report, :null => false

@@ -12,15 +12,6 @@
 
 ActiveRecord::Schema.define(:version => 20110527063441) do
 
-  create_table "exam_types", :force => true do |t|
-    t.string   "name",        :null => false
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "exam_types", ["name"], :name => "index_exam_types_on_name", :unique => true
-
   create_table "item_ratings", :force => true do |t|
     t.integer  "item_id"
     t.integer  "rater_id"
@@ -92,7 +83,6 @@ ActiveRecord::Schema.define(:version => 20110527063441) do
     t.integer  "scenario_family_id",          :null => false
     t.integer  "patient_age",                 :null => false
     t.string   "patient_sex",                 :null => false
-    t.integer  "index_exam_type_id",          :null => false
     t.text     "index_exam_clinical_history", :null => false
     t.text     "index_exam_comment"
     t.text     "index_exam_report",           :null => false
