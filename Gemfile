@@ -51,4 +51,6 @@ group :test, :development do
   gem 'hirb'
   gem 'interactive_editor'
   gem 'spork', '~> 0.9.0.rc7'
+  gem 'hpricot'
+  gem 'ruby_parser'
 end
