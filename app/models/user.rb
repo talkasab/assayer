@@ -14,6 +14,6 @@ class User < ActiveRecord::Base
   has_many :scenario_statuses, :class_name => "RaterScenarioStatus", :foreign_key => :rater_id, :inverse_of => :rater
 
   # Validations
-  validates_presence_of :name
-
+  # Theory being, first initial + space + two-letter-surname
+  validates :name, :presence => true, :length => { :minimum => 4 } 
 end
