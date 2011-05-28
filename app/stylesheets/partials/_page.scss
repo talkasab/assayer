@@ -46,12 +46,86 @@ input:invalid, textarea:invalid {
 // Add your own custom styles below
 //-----------------------------------
 
-body {}
+$primary_color: #4B7399;
+$flash_notice_background: #ccffcc;
+$flash_notice_border: #66cc66;
+$flash_error_background: #ffcccc;
+$flash_error_border: #cc6666;
+$error_explanation_background: #f0f0f0;
+$error_explanation_border: #cf0000;
+$error_explanation_header_background: #cc0000;
+$error_explanation_header: white;
+$error_explanation_text: #333333;
 
-#container {}
+a {
+  color: blue;
+  img {
+    border: none; } }
+
+.clear {
+  clear: both;
+  height: 0;
+  overflow: hidden; }
+
+body {
+  background-color: $primary_color;
+  font: {
+    family: Verdana, Helvetica, Arial;
+    size: 14px; }; }
+
+#container {
+  width: 75%;
+  margin: 0 auto;
+  background: white;
+  padding: 20px 40px;
+  border: solid 1px black;
+  margin-top: 20px; }
 
 header {}
 
 #main {}
 
 footer {}
+
+#flash_notice,
+#flash_error {
+  padding: 5px 8px;
+  margin: 10px 0; }
+
+#flash_notice {
+  background-color: $flash_notice_background;
+  border: solid 1px $flash_notice_border; }
+
+#flash_error {
+  background-color: $flash_error_background;
+  border: solid 1px $flash_error_border; }
+
+.fieldWithErrors {
+  display: inline; }
+
+#errorExplanation {
+  width: 400px;
+  border: 2px solid #cf0000;
+  padding: 0;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: $error_explanation_background;
+  h2 {
+    text-align: left;
+    padding: 5px 5px 5px 15px;
+    margin: 0;
+    font: {
+      weight: bold;
+      size: 12px; };
+    background-color: $error_explanation_header_background;
+    color: $error_explanation_header; }
+  p {
+    color: $error_explanation_text;
+    margin-bottom: 0;
+    padding: 8px; }
+  ul {
+    margin: 2px 24px;
+    li {
+      font-size: 12px;
+      list-style: disc; } } }
+
