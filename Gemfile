@@ -44,7 +44,7 @@ group :test, :development do
   gem 'capybara', '1.0.0beta1'
   gem 'mocha', '~> 0.9'
   gem 'shoulda-matchers'
-  gem 'factory_girl_rails', '1.1.beta1'
+  gem 'factory_girl_rails', '1.1.beta1', :require => false
   gem 'wirble'
   gem 'wirb'
   gem 'awesome_print'
