@@ -22,5 +22,10 @@ Assayer::Application.configure do
 
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
+
+  # Default mailer URL for a POW-based development environment
+  config.action_mailer.default_url_options = { :host => "assayer.dev" }
+  # Default mailer URL for a non-POW-based development environment, like WEBrick
+  # config.action_mailer.default_url_options = { :host => "localhost:3000" }
 end
 

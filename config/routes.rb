@@ -1,6 +1,9 @@
 Assayer::Application.routes.draw do
   devise_for :users
 
+  # Devise wants this when we make an actual landing spot
+  # root :to => "rating_assignments#show"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
