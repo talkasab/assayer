@@ -47,30 +47,15 @@ input:invalid, textarea:invalid {
 //-----------------------------------
 
 $primary_color: #4B7399;
-$flash_notice_background: #ccffcc;
-$flash_notice_border: #66cc66;
-$flash_error_background: #ffcccc;
-$flash_error_border: #cc6666;
-$error_explanation_background: #f0f0f0;
-$error_explanation_border: #cf0000;
-$error_explanation_header_background: #cc0000;
-$error_explanation_header: white;
-$error_explanation_text: #333333;
 
 a {
   color: blue;
   img {
     border: none; } }
 
-.clear {
-  clear: both;
-  height: 0;
-  overflow: hidden; }
-
 body {
   background-color: $primary_color;
   font: {
-    family: Verdana, Helvetica, Arial;
     size: 14px; }; }
 
 #container {
@@ -87,6 +72,14 @@ header {}
 
 footer {}
 
+// Flash notice/errors
+// -------------------
+
+$flash_notice_background: #ccffcc;
+$flash_notice_border: #66cc66;
+$flash_error_background: #ffcccc;
+$flash_error_border: #cc6666;
+
 #flash_notice,
 #flash_error {
   padding: 5px 8px;
@@ -102,6 +95,15 @@ footer {}
 
 .fieldWithErrors {
   display: inline; }
+
+// Validation errors
+// -----------------
+
+$error_explanation_background: #f0f0f0;
+$error_explanation_border: #cf0000;
+$error_explanation_header_background: #cc0000;
+$error_explanation_header: white;
+$error_explanation_text: #333333;
 
 #errorExplanation {
   width: 400px;
