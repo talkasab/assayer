@@ -5,7 +5,6 @@ class CreateRaterScenarioStatuses < ActiveRecord::Migration
       t.references :scenario, :null => false
       t.timestamp :started_at
       t.timestamp :finished_at
-      t.integer :items_completed, :null => false, :default => 0
       t.timestamps
     end
     add_index :rater_scenario_statuses, [:rater_id, :scenario_id], :unique => true

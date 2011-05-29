@@ -4,8 +4,7 @@ FactoryGirl.define do
   factory :rater_scenario_status do
     association :rater, :factory => :user
     association :scenario
-    started_at { 1.day.ago }
+    started_at nil
     finished_at nil
-    items_completed 1
   end
 end
