@@ -3,7 +3,7 @@ class CreateMedicalRecordItems < ActiveRecord::Migration
     create_table :medical_record_items do |t|
       t.references :scenario, :null => false
       t.integer :days_from_index, :null => false
-      t.references :item_type, :null => false
+      t.string :item_type, :null => false
       t.string :description
       t.text :report, :null => false
       t.timestamps

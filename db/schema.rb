@@ -22,21 +22,10 @@ ActiveRecord::Schema.define(:version => 20110527063441) do
 
   add_index "item_ratings", ["item_id", "rater_id"], :name => "index_item_ratings_on_item_id_and_rater_id", :unique => true
 
-  create_table "medical_record_item_types", :force => true do |t|
-    t.string   "code",        :null => false
-    t.string   "name",        :null => false
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "medical_record_item_types", ["code"], :name => "index_medical_record_item_types_on_code", :unique => true
-  add_index "medical_record_item_types", ["name"], :name => "index_medical_record_item_types_on_name", :unique => true
-
   create_table "medical_record_items", :force => true do |t|
     t.integer  "scenario_id",     :null => false
     t.integer  "days_from_index", :null => false
-    t.integer  "item_type_id",    :null => false
+    t.string   "item_type",       :null => false
     t.string   "description"
     t.text     "report",          :null => false
     t.datetime "created_at"

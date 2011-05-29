@@ -5,7 +5,6 @@ describe MedicalRecordItem do
 
   # Relationships
   it { should belong_to(:scenario) }
-  it { should belong_to(:item_type) }
 
   # Validations
   it { should validate_presence_of(:scenario) }
@@ -14,6 +13,12 @@ describe MedicalRecordItem do
   [-5, 12].each { |n| it { should allow_value(n).for(:days_from_index) } }
   [5.3, 6.7, 3.1415926].each { |n| it { should_not allow_value(n).for(:days_from_index) } }
   it { should validate_presence_of(:item_type) }
+  [:rad, :opn, :ndo, :car, :mic].each { |n| it { should allow_value(n).for(:item_type) } }
+  it "should choke on bad types" do
+    [:dis, :nte, :foo, :bar, :baz].each do |bad_type| 
+      expect { procedure.item_type = bad_type }.to raise_error(ArgumentError)
+    end
+  end
   it { should validate_presence_of(:report) }
 end
 
