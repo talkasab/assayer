@@ -5,7 +5,8 @@ FactoryGirl.define do
     association :scenario_family
     patient_age 12
     patient_sex "M"
-    index_exam_clinical_history "MyText"
-    index_exam_report "MyText"
+    exam_clinical_history "Pain"
+    exam_description "Chest X-ray"
+    exam_report "Unremarkable exam. No abnormality seen to account for patient's symptoms."
   end
 end

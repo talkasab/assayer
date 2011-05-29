@@ -6,11 +6,9 @@ class Scenario < ActiveRecord::Base
   has_many :raters, :through => :rater_statuses
 
   # Validations
-  validates_presence_of :scenario_family
-  validates_presence_of :patient_age
-  validates_numericality_of :patient_age, :only_integer => true, :greater_than_or_equal_to => 0, :less_than => 150
-  validates_presence_of :patient_sex
-  validates_inclusion_of :patient_sex, :in => %w(M F)
-  validates_presence_of :index_exam_clinical_history
-  validates_presence_of :index_exam_report
+  validates :scenario_family, :presence => true
+  validates :patient_age, :presence => true, 
+    :numericality => { :only_integer => true, :greater_than_or_equal_to => 0, :less_than => 150 }
+  validates :patient_sex, :presence => true, :inclusion => { :in => %w(M F) }
+  validates_presence_of :exam_description, :exam_clinical_history, :exam_report
 end

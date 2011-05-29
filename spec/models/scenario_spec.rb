@@ -1,7 +1,18 @@
 require 'spec_helper'
 
 describe Scenario do
-  let!(:breastca1) { Factory.create(:scenario, :patient_age => 58, :patient_sex => 'F') }
+  report =<<-END
+    FINDINGS:
+    Microcalcifications and architectural distortion concerning for malignancy. Biopsy is recommended. 
+    
+    IMPRESSION:
+    BIRADS 4.
+  END
+  let!(:breastca1) do 
+    Factory.create(:scenario, :patient_age => 58, :patient_sex => 'F',
+     :exam_description => "Mammogram", :exam_clinical_history => "Lump",
+     :exam_report => report)
+   end
 
   # Relationships
   it { should belong_to(:scenario_family) }
@@ -19,6 +30,7 @@ describe Scenario do
   it { should allow_value('M').for(:patient_sex) }
   it { should allow_value('F').for(:patient_sex) }
   it { ['X', 'A', 'G' 'B', 'C'].each {|l| should_not allow_value(l).for(:patient_sex) } }
-  it { should validate_presence_of(:index_exam_clinical_history) }
-  it { should validate_presence_of(:index_exam_report) }
+  it { should validate_presence_of(:exam_description) }
+  it { should validate_presence_of(:exam_clinical_history) }
+  it { should validate_presence_of(:exam_report) }
 end
