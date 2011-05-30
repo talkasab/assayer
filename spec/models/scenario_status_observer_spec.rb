@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe RatingStatusObserver do
+describe ScenarioStatusObserver do
   let!(:scenario) { Factory.create(:scenario) }
   let!(:item) { Factory.create(:medical_record_item, :scenario => scenario) }
   let!(:item2) { Factory.create(:medical_record_item, :scenario => scenario) }

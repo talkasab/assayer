@@ -1,4 +1,4 @@
-class RatingStatusObserver < ActiveRecord::Observer
+class ScenarioStatusObserver < ActiveRecord::Observer
   observe :item_rating
 
   def after_create(rating)
