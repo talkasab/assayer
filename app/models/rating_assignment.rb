@@ -8,24 +8,36 @@ class RatingAssignment < ActiveRecord::Base
   validates_uniqueness_of :rater_id, :scope => :scenario_family_id
 
   # Status Logic
-  scope :current, lambda { where("(start_at is null OR start_at <= :now) AND (end_at is null OR end_at >= :now)", :now => Time.now) }
-  scope :expired, lambda { where("end_at < ?", Time.now) }
-  scope :pending, lambda { where("start_at > ?", Time.now) }
+  scope :finished, where("finished_at is not null")
+  scope :not_finished, where("finished_at is null")
+  scope :current, lambda { not_finished.where("(start_at is null OR start_at <= :now) AND (end_at is null OR end_at >= :now)", :now => Time.now) }
+  scope :expired, lambda { not_finished.where("end_at < ?", Time.now) }
+  scope :pending, lambda { not_finished.where("start_at > ?", Time.now) }
+
+  def mark_finished!
+    touch(:finished_at)
+  end
+
+  def finished?
+    finished_at.present? && finished_at <= Time.now
+  end
 
   def expired?
-    end_at.present? && end_at < Time.now
+    ! finished? && end_at.present? && end_at < Time.now
   end
 
   def pending?
-    start_at.present? && start_at > Time.now
+    ! finished? && start_at.present? && start_at > Time.now
   end
 
   def current?
-    ! expired? && ! pending?
+    ! finished? && ! expired? && ! pending?
   end
 
   def status
-    if expired?
+    if finished?
+      :finished
+    elsif expired?
       :expired
     elsif pending?
       :pending

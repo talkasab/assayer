@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(:version => 20110527063441) do
     t.integer  "scenario_family_id", :null => false
     t.datetime "start_at"
     t.datetime "end_at"
+    t.datetime "finished_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

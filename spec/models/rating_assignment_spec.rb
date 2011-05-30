@@ -13,7 +13,7 @@ describe RatingAssignment do
   it { should_not validate_presence_of(:start_at) }
   it { should validate_uniqueness_of(:rater_id).scoped_to(:scenario_family_id) }
 
-  # Current/expired/pending logic
+  # Current/expired/pending/finished logic
   it "should be current (not pending) with blank start_at" do
     rating = Factory.create(:rating_assignment, :start_at => nil)
     rating.status.should == :current
@@ -21,6 +21,10 @@ describe RatingAssignment do
     rating.should_not be_pending
     RatingAssignment.current.all.should include(rating)
     RatingAssignment.pending.all.should_not include(rating)
+    rating.mark_finished!
+    rating.status.should == :finished
+    rating.should_not be_current
+    RatingAssignment.current.all.should_not include(rating)
   end
 
   it "should be pending with a future start_at date" do
@@ -30,6 +34,10 @@ describe RatingAssignment do
     rating.should be_pending
     RatingAssignment.current.all.should_not include(rating)
     RatingAssignment.pending.all.should include(rating)
+    rating.mark_finished!
+    rating.status.should == :finished
+    rating.should_not be_pending
+    RatingAssignment.pending.all.should_not include(rating)
   end
 
   it "should be current (not expired) with a blank end_at" do
@@ -48,6 +56,20 @@ describe RatingAssignment do
     rating.should be_expired
     RatingAssignment.current.all.should_not include(rating)
     RatingAssignment.expired.all.should include(rating)
+    rating.mark_finished!
+    rating.status.should == :finished
+    rating.should_not be_expired
+    RatingAssignment.expired.all.should_not include(rating)
+  end
+
+  it "should be finished when finished_at is set" do
+    rating = Factory.create(:rating_assignment)
+    rating.should_not be_finished
+    rating.mark_finished!
+    rating.should be_finished
+    rating.status.should == :finished
+    RatingAssignment.finished.all.should include(rating)
+    RatingAssignment.current.all.should_not include(rating)
   end
 
   describe "Knowing which scenarios need to be completed" do 

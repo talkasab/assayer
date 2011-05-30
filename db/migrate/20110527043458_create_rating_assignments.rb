@@ -5,6 +5,7 @@ class CreateRatingAssignments < ActiveRecord::Migration
       t.references :scenario_family, :null => false
       t.timestamp :start_at
       t.timestamp :end_at
+      t.timestamp :finished_at
       t.timestamps
     end
     add_index :rating_assignments, [:scenario_family_id, :rater_id], :unique => true

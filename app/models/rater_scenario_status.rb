@@ -23,15 +23,11 @@ class RaterScenarioStatus < ActiveRecord::Base
   end
 
   def mark_started!
-    if started_at.nil?
-      self.started_at = Time.now # if self.started_at.nil?
-      save! 
-    end
+    touch(:started_at) if started_at.blank?
   end
 
   def mark_finished!
-    self.finished_at = Time.now if self.finished_at.nil?
-    save!
+    touch(:finished_at) if finished_at.blank?
   end
 
   # Items to complete
