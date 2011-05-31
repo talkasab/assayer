@@ -4,8 +4,9 @@ Assayer::Application.routes.draw do
   resources :assignments, :only => [:index]
   root :to => "assignments#index"
 
-  # Devise wants this when we make an actual landing spot
-  # root :to => "rating_assignments#show"
+  resources :scenarios, :only => [:show] do
+    resources :items, :only => [:show, :index]
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
