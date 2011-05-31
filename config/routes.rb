@@ -1,5 +1,8 @@
 Assayer::Application.routes.draw do
+
   devise_for :users
+  resources :assignments, :only => [:index]
+  root :to => "assignments#index"
 
   # Devise wants this when we make an actual landing spot
   # root :to => "rating_assignments#show"
