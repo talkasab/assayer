@@ -43,7 +43,6 @@ gem "decent_exposure", "~> 1.0.1"
 group :test, :development do
   gem 'rspec-rails', "~> 2.6"
   gem 'capybara', '1.0.0beta1'
-  gem 'mocha', '~> 0.9'
   gem 'shoulda-matchers'
   gem 'factory_girl_rails', '1.1.beta1', :require => false
   gem 'wirble'
