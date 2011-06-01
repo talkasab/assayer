@@ -2,23 +2,28 @@ require 'spec_helper'
 
 describe AssignmentsController do
 
-  describe "GET 'index'" do
-    context "without being logged in" do
-      it "should redirect to the login page" do
-        get 'index'
-        response.should redirect_to(new_user_session_path)
-      end
+  context "without being logged in" do
+    its(:current_user) { should be_nil }
+
+    it "index should redirect to the login page" do
+      get 'index'
+      response.should redirect_to(new_user_session_path)
     end
+  end
 
-    context "with a successful login" do
+  describe "GET 'index'" do
+
+    context "with a valid login" do
       let!(:user) { Factory.create(:user) }
-      before(:each) { sign_in user }
-
-      it "should be successful" do
+      let!(:assignments) { (1..3).map { Factory.create :rating_assignment, :rater => user } }
+      before(:each) do
+        sign_in user 
         get 'index'
-        response.should be_success
-        controller.current_user.should == user
       end
+
+      its(:current_user) { should == user }
+      specify { response.should be_success }
+      it { should have(3).assignments }
     end
   end
 
