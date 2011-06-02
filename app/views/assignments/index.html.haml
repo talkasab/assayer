@@ -1,2 +1,19 @@
-%h1 Assignments#index
-%p Find me in app/views/assignments/index.html.haml
+-title "Current Assignments"
+
+-if assignments.present?
+  %table
+    %col#scenario_family
+    %col#status
+    %col#number_to_do
+    %col#link
+    %thead
+      %tr
+        %th Name
+        %th Description
+        %th Status
+        %th # To Do
+        %th Next Item
+    %tbody
+      = render :partial => 'assignment_line', :collection => assignments, :as => :assignment
+-else
+  .no_assignments You currently have no assignments.
