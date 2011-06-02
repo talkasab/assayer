@@ -17,5 +17,6 @@ describe AssignmentStatusObserver do
     assignment.reload
     assignment.should have(0).incomplete_scenarios
     assignment.status.should == :finished
+    assignment.should be_finished
   end
 end

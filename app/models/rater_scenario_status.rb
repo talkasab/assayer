@@ -23,16 +23,20 @@ class RaterScenarioStatus < ActiveRecord::Base
   end
 
   def mark_started!
-    touch(:started_at) if started_at.blank?
+    update_attributes(:started_at => Time.now) if started_at.blank?
   end
 
   def mark_finished!
-    touch(:finished_at) if finished_at.blank?
+    update_attributes(:finished_at => Time.now) if finished_at.blank?
   end
 
   # Items to complete
   def incomplete_items(reload = false)
-    scenario.items(reload).where("id not in (select r.item_id from item_ratings r, medical_record_items m where r.rater_id=? and r.item_id = m.id and m.scenario_id=?)", rater.id, scenario.id)
+    subselect = <<-SQLEND
+      select r.item_id from item_ratings r, medical_record_items m 
+      where r.rater_id=? and r.item_id = m.id and m.scenario_id=?
+    SQLEND
+    scenario.items(reload).where("id not in (#{subselect})", rater.id, scenario.id)
   end
 
 end

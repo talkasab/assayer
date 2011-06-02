@@ -2,6 +2,7 @@ class RatingAssignment < ActiveRecord::Base
   # Associations
   belongs_to :rater, :class_name => "User", :inverse_of => :assignments
   belongs_to :scenario_family, :inverse_of => :assignments
+  delegate :scenarios, :to => :scenario_family
 
   # Validations
   validates_presence_of :rater, :scenario_family
@@ -15,7 +16,7 @@ class RatingAssignment < ActiveRecord::Base
   scope :pending, lambda { not_finished.where("start_at > ?", Time.now) }
 
   def mark_finished!
-    touch(:finished_at)
+    update_attributes(:finished_at => Time.now)
   end
 
   def finished?
@@ -53,8 +54,12 @@ class RatingAssignment < ActiveRecord::Base
       WHERE r.scenario_id = s.id AND s.scenario_family_id = :scenario_family
       AND r.rater_id = :rater AND r.finished_at IS NOT NULL
     SQLEND
-    scenario_family.scenarios.where("\"scenarios\".id NOT IN (#{subselect})", 
-                                    :rater => rater_id, :scenario_family => scenario_family_id)
+    scenarios.where("\"scenarios\".id NOT IN (#{subselect})", 
+                    :rater => rater_id, :scenario_family => scenario_family_id)
+  end
+
+  def next_scenario
+    incomplete_scenarios.order(:id).first
   end
 end
 
