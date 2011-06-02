@@ -1,12 +1,17 @@
 Assayer::Application.routes.draw do
 
   devise_for :users
-  resources :assignments, :only => [:index]
-  root :to => "assignments#index"
 
-  resources :scenarios, :only => [:show] do
-    resources :items, :only => [:show, :index]
+  resources :assignments, :only => [:index] do
+    resources :scenarios, :only => [:show] do
+      get 'next', :on => :collection
+      resources :items, :only => [:show, :index] do
+        get 'next', :on => :collection
+      end
+      resources :item_rating, :only => [:new, :edit, :update, :create]
+    end
   end
+  root :to => "assignments#index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
