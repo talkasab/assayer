@@ -89,5 +89,49 @@ describe RatingAssignment do
       assignment.incomplete_scenarios.should_not include(scenarios[0])
     end
   end
-end
 
+  describe "determine whether a user is currently assigned" do
+    let!(:scenario) { Factory.create(:scenario, :scenario_family => assignment.scenario_family) }
+    let!(:user) { assignment.rater }
+
+    specify { RatingAssignment.user_assigned_to_scenario?(user, scenario).should be_true }
+    it "should not show as assigned when pending" do
+      assignment.update_attributes(:start_at => DateTime.tomorrow)
+      assignment.status.should == :pending
+      RatingAssignment.user_assigned_to_scenario?(user, scenario).should be_false
+    end
+
+    it "should not show as assigned when expired" do
+      assignment.update_attributes(:end_at => DateTime.yesterday)
+      assignment.status.should == :expired
+      RatingAssignment.user_assigned_to_scenario?(user, scenario).should be_false
+    end
+
+    it "should not show as assigned when finished" do
+      assignment.update_attributes(:finished_at => DateTime.yesterday)
+      assignment.status.should == :finished
+      RatingAssignment.user_assigned_to_scenario?(user, scenario).should be_false
+    end
+  end
+
+  describe "should pull up the next scenario in an assignment" do
+    let!(:scenarios) { (1..3).map { Factory.create(:scenario, :scenario_family => assignment.scenario_family) } }
+    let!(:statuses) { scenarios.map {|s| RaterScenarioStatus.create(:rater_id => user, :scenario => s) } }
+    let!(:user) { assignment.rater }
+
+    it "calling next_scenario() repeatedly should work down the list" do
+      assignment.should have(3).incomplete_scenarios
+      assignment.next_scenario.should == scenarios[0]
+      statuses[0].mark_finished!
+      assignment.next_scenario.should == scenarios[1]
+      statuses[1].mark_finished!
+      assignment.next_scenario.should == scenarios[2]
+      statuses[2].mark_finished!
+      assignment.next_scenario.should be_nil
+      assignment.should have(0).incomplete_scenarios
+      assignment.reload
+      assignment.should be_finished
+    end
+
+  end
+end

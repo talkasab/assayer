@@ -47,6 +47,15 @@ class RatingAssignment < ActiveRecord::Base
     end
   end
 
+  # Is user assigned?
+  def self.user_assigned_to_scenario?(user, scenario)
+    if assignment = find_by_scenario_family_id_and_rater_id(scenario.scenario_family.id, user.id)
+      assignment.status == :current
+    else
+      false
+    end
+  end
+
   # Incomplete scenarios
   def incomplete_scenarios
     subselect = <<-SQLEND
