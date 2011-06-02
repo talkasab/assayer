@@ -39,6 +39,7 @@ gem "compass", "~> 0.11.1"
 gem "html5-boilerplate"
 gem "rails3-generators"
 gem "decent_exposure", "~> 1.0.1"
+gem "term-ansicolor"
 
 group :test, :development do
   gem 'rspec-rails', "~> 2.6"
