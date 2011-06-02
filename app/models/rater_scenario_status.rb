@@ -21,6 +21,10 @@ class RaterScenarioStatus < ActiveRecord::Base
       :unstarted
     end
   end
+  
+  def unstarted?; status == :unstarted; end
+  def started?; status == :started; end
+  def finished?; status == :finished; end
 
   def mark_started!
     update_attributes(:started_at => Time.now) if started_at.blank?
