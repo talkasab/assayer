@@ -14,31 +14,53 @@ describe ScenariosController do
 
   context "with a logged in user" do
     let!(:user) { Factory.create(:user) }
-    let!(:assignment) { Factory.create(:rating_assignment) }
+    let!(:assignment) { Factory.create(:rating_assignment, :rater => user) }
     let!(:scenarios) { (1..3).map { Factory.create(:scenario, :scenario_family => assignment.scenario_family)} }
     
     before(:each) do
       sign_in user
-      RatingAssignment.stub(:user_assigned_to_scenario?).and_return(true)
-      get :show, :assignment_id => assignment, :id => scenarios[0]
     end
 
-    specify { response.should be_success }
-    its(:assignment) { should == assignment }
-    it { should have(3).scenarios }
-    its(:scenario) { should == scenarios[0] }
+    context "and his own assignment" do
+      before(:each) { get :show, :assignment_id => assignment, :id => scenarios[0] }
+
+      specify { response.should be_success }
+      its(:assignment) { should == assignment }
+      it { should have(3).scenarios }
+      its(:scenario) { should == scenarios[0] }
+    end
 
     context "logged in as a user not assigned to the scenario" do
       let!(:another_user) { Factory.create(:user) }
+      let!(:another_assignment) { Factory.create(:rating_assignment, :rater => another_user) }
+      let!(:other_scenarios) { (1..3).map { Factory.create(:scenario, :scenario_family => another_assignment.scenario_family) } }
+      before(:each) { get :show, :assignment_id => another_assignment, :id => other_scenarios[0] }
       it "should redirect" do
-        RatingAssignment.stub(:user_assigned_to_scenario?).and_return(false)
-        get :show, :assignment_id => assignment, :id => scenarios[0]
         response.should redirect_to(assignments_path)
         flash[:error].should =~ /not assigned/
       end
     end
 
+    context "when the scenario is finished" do
+      before(:each) do
+        RaterScenarioStatus.create(:scenario => scenarios[0], :rater => user, :finished_at => Time.now) 
+        get :show, :assignment_id => assignment, :id => scenarios[0]  
+      end
+
+      its(:scenario) { should == scenarios[0] }
+      it "should redirect to the next scenario" do
+        response.should redirect_to(assignment_scenario_path(assignment, scenarios[1]))
+      end
+    end
+
+    context "when the assignment as been finished" do
+      before(:each) do
+        3.times { |n| RaterScenarioStatus.create(:scenario => scenarios[n], :rater => user, :finished_at => Time.now) }
+        get :show, :assignment_id => assignment, :id => scenarios[0]
+      end
+      it "should redirect to the assignments index" do
+        response.should redirect_to(assignments_path)
+      end
+    end
   end
-
-
 end
