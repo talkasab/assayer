@@ -1,0 +1,9 @@
+#item_info
+  = item.item_type.name.capitalize
+  %br/
+  = item.description
+  %br/
+  = days_from_to_text(item.days_from_index)
+#item_report
+  %h3 Report
+  = simple_format(item.report)

@@ -31,8 +31,8 @@ describe "scenarios/show.html.haml" do
     rendered.should have_selector("#item_list #medical_record_item_#{items[2].id}")
     
     rendered.should have_selector("#current_item") 
-    rendered.should have_selector("#current_item #current_item_info")
-    rendered.should have_selector("#current_item #current_item_report")
+    rendered.should have_selector("#current_item #item_info")
+    rendered.should have_selector("#current_item #item_report")
 
     rendered.should have_selector("#current_item #item_rating_form") 
     rendered.should have_selector("#current_item #item_rating_form form#new_item_rating") 

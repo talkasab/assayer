@@ -29,29 +29,10 @@
 #current_item
   - if current_item.present?
     %h2 Item to Evaluate
-    #current_item_info
-      = current_item.item_type.name.capitalize
-      %br/
-      = current_item.description
-      %br/
-      = days_from_to_text(current_item.days_from_index)
-    #current_item_report
-      %h3 Report
-      = simple_format(current_item.report)
+    = render :partial => "medical_record_items/item", :object => current_item, :as => :item
 
     #item_rating_form
-      %h3 Rate
-      =form_for item_rating do |f|
-        = f.hidden_field :rater_id
-        = f.hidden_field :item_id
-        = f.radio_button :rating, 0
-        = f.label :rating_0, "Irrelevant"
-        = f.radio_button :rating, 1
-        = f.label :rating_0, "Unlikely"
-        = f.radio_button :rating, 2
-        = f.label :rating_0, "Likely"
-        = f.radio_button :rating, 3
-        = f.label :rating_0, "Relevant"
-        = f.submit
+      %h3 Rate Item
+      = render :partial => "item_ratings/form", :object => item_rating, :as => :item_rating
   - else
     %strong.error No item available.
