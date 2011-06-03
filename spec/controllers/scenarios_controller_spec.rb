@@ -37,6 +37,7 @@ describe ScenariosController do
       end
       its(:items) { should == items }
       its(:current_item) { should == items.first }
+      its(:item_rating) { should be_a_new(ItemRating) }
     end
 
     context "logged in as a user not assigned to the scenario" do

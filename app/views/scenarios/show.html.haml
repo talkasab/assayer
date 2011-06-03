@@ -1,2 +1,57 @@
-%h1 Scenarios#show
-%p Find me in app/views/scenarios/show.html.haml
+- title "Patient Scenario"
+
+= content_tag_for(:div, scenario_family) do
+  Scenario Family: 
+  %strong= scenario_family.name
+
+- if items.present?
+  %ul#item_list
+    = render :partial => "medical_record_items/item_line", :collection => items, :as => :item
+- else
+  #no_items No medical record items for this scenario.
+
+= content_tag_for(:div, scenario) do
+  %h2 Context
+  .exam_info
+    %strong Description
+    = scenario.exam_description
+  .exam_info
+    %strong Clinical History
+    %span.patient_info= "#{scenario.patient_age} #{scenario.patient_sex.capitalize}"
+    = scenario.exam_clinical_history
+  - if scenario.exam_comment.present?
+    .exam_info
+      %strong Comment
+      = scenario.exam_comment
+  .report
+    = simple_format(scenario.exam_report)
+
+#current_item
+  - if current_item.present?
+    %h2 Item to Evaluate
+    #current_item_info
+      = current_item.item_type.name.capitalize
+      %br/
+      = current_item.description
+      %br/
+      = days_from_to_text(current_item.days_from_index)
+    #current_item_report
+      %h3 Report
+      = simple_format(current_item.report)
+
+    #item_rating_form
+      %h3 Rate
+      =form_for item_rating do |f|
+        = f.hidden_field :rater_id
+        = f.hidden_field :item_id
+        = f.radio_button :rating, 0
+        = f.label :rating_0, "Irrelevant"
+        = f.radio_button :rating, 1
+        = f.label :rating_0, "Unlikely"
+        = f.radio_button :rating, 2
+        = f.label :rating_0, "Likely"
+        = f.radio_button :rating, 3
+        = f.label :rating_0, "Relevant"
+        = f.submit
+  - else
+    %strong.error No item available.

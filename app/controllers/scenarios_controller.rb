@@ -6,6 +6,7 @@ class ScenariosController < ApplicationController
   expose(:scenario_family) { scenario.scenario_family }
   expose(:scenario_status) { RaterScenarioStatus.find_or_create_by_rater_id_and_scenario_id(current_user.id, scenario.id) }
   expose(:current_item) { scenario_status.incomplete_items.first }
+  expose(:item_rating) { ItemRating.new(:rater => current_user, :item => current_item) }
 
   before_filter :check_assigned_to_scenario
 

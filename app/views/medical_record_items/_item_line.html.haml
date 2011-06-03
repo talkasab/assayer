@@ -1,0 +1,6 @@
+= content_tag_for(:li, item, :class => "#{item.item_type.code}_type") do
+  %strong= item.item_type.name
+  = days_from_to_text(item.days_from_index)
+  %br/
+  = item.description
+

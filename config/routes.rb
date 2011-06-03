@@ -8,9 +8,9 @@ Assayer::Application.routes.draw do
       resources :items, :only => [:show, :index] do
         get 'next', :on => :collection
       end
-      resources :item_rating, :only => [:new, :edit, :update, :create]
     end
   end
+  resources :item_ratings, :only => [:new, :edit, :update, :create]
   root :to => "assignments#index"
 
   # The priority is based upon order of creation:
