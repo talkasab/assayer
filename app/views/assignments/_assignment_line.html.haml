@@ -1,7 +1,6 @@
-- scenario_family = assignment.scenario_family
-= content_tag_for(:tr, assignment, :data => {:scenario_family_id => scenario_family.id}) do
-  %td= scenario_family.name
-  %td= scenario_family.description
+= content_tag_for(:tr, assignment, :data => {:scenario_family_id => assignment.scenario_family_id}) do
+  %td= assignment.name
+  %td= assignment.description
   %td= assignment.status.to_s.capitalize
   %td= assignment.incomplete_scenarios.count
   %td= link_to("Next Item", next_assignment_scenarios_path(assignment))

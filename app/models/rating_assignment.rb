@@ -2,7 +2,8 @@ class RatingAssignment < ActiveRecord::Base
   # Associations
   belongs_to :rater, :class_name => "User", :inverse_of => :assignments
   belongs_to :scenario_family, :inverse_of => :assignments
-  delegate :scenarios, :to => :scenario_family
+  delegate :name, :description, :scenarios, :to => :scenario_family
+  default_scope includes(:scenario_family)
 
   # Validations
   validates_presence_of :rater, :scenario_family
