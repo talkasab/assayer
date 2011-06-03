@@ -1,8 +1,11 @@
 class ScenariosController < ApplicationController
   expose(:assignment) { RatingAssignment.find(params[:assignment_id]) }
   expose(:scenarios) { assignment.scenarios }
-  expose(:scenario)
-  expose(:scenario_status) { RaterScenarioStatus.find_or_create_by_rater_id_and_scenario_id(current_user, scenario) }
+  expose(:scenario) { assignment.scenarios.find(params[:id], :include => [:scenario_family, :items]) }
+  expose(:items) { scenario.items }
+  expose(:scenario_family) { scenario.scenario_family }
+  expose(:scenario_status) { RaterScenarioStatus.find_or_create_by_rater_id_and_scenario_id(current_user.id, scenario.id) }
+  expose(:current_item) { scenario_status.incomplete_items.first }
 
   before_filter :check_assigned_to_scenario
 

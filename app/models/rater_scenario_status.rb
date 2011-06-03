@@ -2,6 +2,7 @@ class RaterScenarioStatus < ActiveRecord::Base
   # Associations
   belongs_to :rater, :class_name => "User", :inverse_of => :scenario_statuses
   belongs_to :scenario, :inverse_of => :rater_statuses
+  delegate :scenario_family_id, :scenario_family, :to => :scenario
 
   # Validations
   validates_presence_of :rater, :scenario
