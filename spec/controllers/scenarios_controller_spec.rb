@@ -40,6 +40,21 @@ describe ScenariosController do
       its(:item_rating) { should be_a_new(ItemRating) }
     end
 
+    context "with a current_item specified" do
+      before(:each) { get :show, :assignment_id => assignment, :id => scenarios.first, :current_item_id => items.second }
+      specify { response.should be_success }
+      its(:current_item) { should == items.second }
+    end
+
+    context "with a current_item that's already been rated" do
+      let!(:rating) { items.second.ratings.create(:rater => user, :rating => 2) }
+      before(:each) { get :show, :assignment_id => assignment, :id => scenarios.first, :current_item_id => items.second }
+      specify { response.should be_success }
+      its(:current_item) { should == items.second }
+      its(:item_rating) { should_not be_a_new(ItemRating) }
+      its(:item_rating) { should == rating }
+    end
+
     context "logged in as a user not assigned to the scenario" do
       let!(:another_user) { Factory.create(:user) }
       let!(:another_assignment) { Factory.create(:rating_assignment, :rater => another_user) }
