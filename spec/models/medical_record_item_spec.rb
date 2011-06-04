@@ -5,6 +5,7 @@ describe MedicalRecordItem do
 
   # Relationships
   it { should belong_to(:scenario) }
+  it { should have_many(:ratings) }
 
   # Validations
   it { should validate_presence_of(:scenario) }
