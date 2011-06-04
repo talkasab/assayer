@@ -10,4 +10,6 @@ class MedicalRecordItem < ActiveRecord::Base
   validates :item_type, :presence => true, :inclusion => { :in => Type::list }
   # NOTE: We validate inclusion of type, but we probably can't set an invalid type anyway
 
+  # Scope
+  scope :before_index_exam, where("days_from_index <= 0")
 end

@@ -58,15 +58,17 @@ describe RaterScenarioStatus do
   # Items to complete
   describe "Figuring out how many items remain to be completed" do
     let!(:scenario) { Factory.create(:scenario) }
-    let!(:items) { (1..5).map { Factory.create(:medical_record_item, :scenario => scenario) } }
+    let!(:items) { (-2..2).map { |n| Factory.create(:medical_record_item, :scenario => scenario, :days_from_index => n) } }
     let!(:user) { Factory.create(:user) }
     let!(:status) { Factory.create(:rater_scenario_status, :scenario => scenario, :rater => user) }
 
     it "should know how many items are incomplete" do
       status.incomplete_items.should have(5).items
       status.incomplete_items.should include(items[0])
+      status.incomplete_items.before_index_exam.should have(3).items
       items[0].ratings.create(:rater => user, :rating => 1)
       status.incomplete_items.should have(4).items
+      status.incomplete_items.before_index_exam.should have(2).items
       status.incomplete_items.should_not include(items[0])
       items[1].ratings.create(:rater => user, :rating => 2)
       status.incomplete_items.should have(3).items
