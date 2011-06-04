@@ -8,7 +8,7 @@ class ScenariosController < ApplicationController
   expose(:current_item) { scenario_status.incomplete_items.first }
   expose(:item_rating) { ItemRating.new(:rater => current_user, :item => current_item) }
 
-  before_filter :check_assigned_to_scenario
+  before_filter :check_assigned_to_current_user!
 
   def show
     if scenario_status.finished?
@@ -22,17 +22,6 @@ class ScenariosController < ApplicationController
   end
 
   protected
-  def check_assigned_to_scenario
-    logmark = log_mark("check_assigned_to_scenario")
-    if assignment.rater_id == current_user.id
-      logger.debug "#{logmark} User #{current_user.id} is the rater for this assignment: #{assignment.inspect}"
-    else 
-      logger.warn "#{logmark} User #{current_user.id} is not the rater for this assignment: #{assignment.inspect}"
-      flash[:error] = "You are not assigned to this scenario."
-      redirect_to assignments_path
-    end
-  end
-
   def redirect_to_next_scenario
     if ! assignment.finished? && assignment.next_scenario.present?
       redirect_to assignment_scenario_path(assignment, assignment.next_scenario)
@@ -41,11 +30,4 @@ class ScenariosController < ApplicationController
       redirect_to assignments_path
     end
   end
-
-  def log_mark(method = nil)
-    mark = self.class.to_s
-    mark += '#' + method if method.present?
-    Color.blue + mark + Color.clear
-  end
-
 end
