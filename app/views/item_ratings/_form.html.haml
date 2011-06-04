@@ -1,10 +1,5 @@
 =form_for item_rating, item_rating_form_params(item_rating) do |f|
-  = f.radio_button :rating, 0
-  = f.label :rating_0, "Irrelevant"
-  = f.radio_button :rating, 1
-  = f.label :rating_0, "Unlikely"
-  = f.radio_button :rating, 2
-  = f.label :rating_0, "Likely"
-  = f.radio_button :rating, 3
-  = f.label :rating_0, "Relevant"
+  - ItemRating::RATINGS.each_with_index do |text, ind|
+    = f.radio_button :rating, ind
+    = f.label "rating_#{ind}", text
   = f.submit
