@@ -19,16 +19,20 @@ describe "assignments routing" do
   end
 end
 
-# describe "scenarios routing" do
-#   let!(:scenario) { Factory.create(:scenario) }
-#   let!(:assignment) { Factory.create(:rating_assignment, :scenario_family => scenario.scenario_family) }
-# 
-#   it "routes :show and :next actions appropriately" do
-#     get("/assignments/#{assignment.id}/scenarios/2").should route_to(:controller => :scenarios, :action => :show, :assignment_id => assignment.id.to_s)
-#     get('/assignments/42/scenarios/next').should route_to(:controller => :scenarios, :action => :next, :assignment_id => '42')
-#   end
-# 
-#   it "knows the named routes" do
-#     # get(assignment_scenario_path(assignment, scenario)).should route_to("scenarios#show")
-#   end
-# end
+describe "scenarios routing" do
+  let!(:scenario) { Factory.create(:scenario) }
+  let!(:assignment) { Factory.create(:rating_assignment, :scenario_family => scenario.scenario_family) }
+
+  it "routes :show and :next actions appropriately" do
+    pending "Need to figure out how to test nested routes"
+    get("/assignments/#{assignment.id}/scenarios/2").should 
+      route_to(:controller => :scenarios, :action => :show, :assignment_id => assignment.id.to_s, :id => "2")
+    get("/assignments/#{assignment.id}/scenarios/next").should 
+      route_to(:controller => :scenarios, :action => :next, :assignment_id => '42')
+  end
+
+  it "knows the named routes" do
+    pending "Need to figure out how to test nested routes"
+    get(assignment_scenario_path(assignment, scenario)).should route_to("scenarios#show")
+  end
+end
