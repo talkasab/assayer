@@ -23,6 +23,8 @@ gem "html5-boilerplate"
 gem "rails3-generators"
 gem "decent_exposure", "~> 1.0.1"
 gem "term-ansicolor"
+gem "libxml-ruby"
+gem "xml-object"
 
 # Bundle gems for the development environment. 
 group :test, :development do
