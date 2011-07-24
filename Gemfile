@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 3.0.8.rc'
+gem 'rails', '~> 3.0.8'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -9,7 +9,6 @@ gem 'rails', '~> 3.0.8.rc'
 gem 'sqlite3-ruby', :require => 'sqlite3'
 
 # Use unicorn as the web server
-# gem 'unicorn'
 
 # Deploy with Capistrano
 # gem 'capistrano'
@@ -42,8 +41,9 @@ gem "decent_exposure", "~> 1.0.1"
 gem "term-ansicolor"
 
 group :test, :development do
+  gem 'unicorn'
   gem 'rspec-rails', "~> 2.6"
-  gem 'capybara', '1.0.0beta1'
+  gem 'capybara', '1.0.0'
   gem 'shoulda-matchers'
   gem 'factory_girl_rails', '1.1.beta1', :require => false
   gem 'wirble'
@@ -51,7 +51,7 @@ group :test, :development do
   gem 'awesome_print'
   gem 'hirb'
   gem 'interactive_editor'
-  gem 'spork', '~> 0.9.0.rc7'
+  gem 'spork', '~> 0.9.0.rc'
   gem 'hpricot'
   gem 'ruby_parser'
 end
