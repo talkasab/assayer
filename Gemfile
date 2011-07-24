@@ -2,7 +2,6 @@ source 'http://rubygems.org'
 
 gem 'rails', '~> 3.0.9'
 
-# gem 'pg'
 gem 'sqlite3-ruby', :require => 'sqlite3'
 
 # Deploy with Capistrano
@@ -28,16 +27,17 @@ gem "xml-object"
 
 # Bundle gems for the development environment. 
 group :test, :development do
+  gem 'unicorn'
   gem 'rspec-rails', "~> 2.6"
   gem 'capybara', '1.0.0'
   gem 'shoulda-matchers'
-  gem 'factory_girl_rails', '1.1.beta1', :require => false
+  gem 'factory_girl_rails', '~> 1.1.0', :require => false
   gem 'wirble'
   gem 'wirb'
   gem 'awesome_print'
   gem 'hirb'
   gem 'interactive_editor'
-  gem 'spork', '~> 0.9.0.rc8'
+  gem 'spork', '~> 0.9.0.rc'
   gem 'hpricot'
   gem 'ruby_parser'
 end

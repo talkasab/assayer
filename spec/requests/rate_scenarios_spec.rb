@@ -12,6 +12,7 @@ describe "Rate a Scenarios" do
       click_button "Sign in"
       page.should have_content("Current Assignments")
       click_link "Next Item"
+      page.should have_content("Patient Scenario")
     end
   end
 end
