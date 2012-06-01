@@ -1,0 +1,30 @@
+// Sprite paths
+$iconSpritePath: image-path('glyphicons-halflings.png');
+$iconWhiteSpritePath: image-path('glyphicons-halflings-white.png');
+
+$oldGold: #CFB52B;
+$navbarBackground: #333;
+$navbarBackgroundHighlight: #986;
+$navbarText: #eee;
+$navbarLinkColor: #eee;
+
+@import 'bootstrap';
+@import 'font-awesome';
+
+body { padding-top: 80px; }
+
+@import 'bootstrap-responsive';
+
+.navbar {
+  .navbar-inner {
+    background-image: url(/images/stackofbars_small.png);
+    padding-left: 140px;
+    background-repeat: no-repeat;
+  }
+  .brand {
+    color: #D9D919;
+    font-size: 120%;
+    font-weight: bold;
+  }
+}
+

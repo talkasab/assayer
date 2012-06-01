@@ -16,3 +16,5 @@ doc/app
 doc/plugins
 doc/*.dot
 public/stylesheets/*
+.sass-cache/
+
