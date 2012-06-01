@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -16,8 +17,8 @@ ActiveRecord::Schema.define(:version => 20110527063441) do
     t.integer  "item_id",    :null => false
     t.integer  "rater_id",   :null => false
     t.integer  "rating"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "item_ratings", ["item_id", "rater_id"], :name => "index_item_ratings_on_item_id_and_rater_id", :unique => true
@@ -28,8 +29,8 @@ ActiveRecord::Schema.define(:version => 20110527063441) do
     t.string   "item_type",       :null => false
     t.string   "description"
     t.text     "report",          :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   add_index "medical_record_items", ["scenario_id"], :name => "index_medical_record_items_on_scenario_id"
@@ -39,8 +40,8 @@ ActiveRecord::Schema.define(:version => 20110527063441) do
     t.integer  "scenario_id", :null => false
     t.datetime "started_at"
     t.datetime "finished_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   add_index "rater_scenario_statuses", ["rater_id", "scenario_id"], :name => "index_rater_scenario_statuses_on_rater_id_and_scenario_id", :unique => true
@@ -52,8 +53,8 @@ ActiveRecord::Schema.define(:version => 20110527063441) do
     t.datetime "start_at"
     t.datetime "end_at"
     t.datetime "finished_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   add_index "rating_assignments", ["rater_id"], :name => "index_rating_assignments_on_rater_id"
@@ -62,8 +63,8 @@ ActiveRecord::Schema.define(:version => 20110527063441) do
   create_table "scenario_families", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   add_index "scenario_families", ["name"], :name => "index_scenario_families_on_name", :unique => true
@@ -76,28 +77,30 @@ ActiveRecord::Schema.define(:version => 20110527063441) do
     t.text     "exam_clinical_history", :null => false
     t.text     "exam_comment"
     t.text     "exam_report",           :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
   end
 
   create_table "users", :force => true do |t|
     t.string   "name"
-    t.string   "email",                                 :default => "",    :null => false
-    t.string   "encrypted_password",     :limit => 128, :default => "",    :null => false
+    t.string   "email",                  :default => "",    :null => false
+    t.string   "encrypted_password",     :default => "",    :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                         :default => 0
+    t.integer  "sign_in_count",          :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.boolean  "admin",                                 :default => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string   "invitation_token"
+    t.boolean  "admin",                  :default => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["invitation_token"], :name => "index_users_on_invitation_token", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
 end

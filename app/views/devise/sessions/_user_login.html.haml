@@ -1,0 +1,10 @@
+= form_for('user', :url => user_session_path) do |f|
+  = f.label :email
+  = f.email_field :email
+  = f.label :password
+  = f.password_field :password
+  %label.checkbox
+    = f.check_box :remember_me
+    Remember Me
+  = f.submit "Sign in", :class => 'btn btn-primary'
+  %a.btn{:href => new_user_password_path} Forgot Password
