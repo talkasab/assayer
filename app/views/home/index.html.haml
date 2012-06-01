@@ -1,0 +1,16 @@
+.row-fluid
+  .span3.well
+    - if user_signed_in?
+      %h2= current_user.name
+      %p You have various tasks that need to be done.
+      %a.btn{:href=>destroy_user_session_path} Sign out
+    - else
+      = render :partial => "devise/sessions/user_login"
+  .span6{:style=>"height: 100%;"}
+    %h1 Assayer
+    %p 
+      %strong Proving Better Searches.
+      Assayer is a system for testing electronic medical record search strategies by comparing search strategy results to the results experts say would be ideal.
+    %a.btn.btn-primary.btn-large{:href=>about_path} Learn More
+  .span3
+    = image_tag '/images/upstackofbars.png'
